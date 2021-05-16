@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  
 </head>
 <!--
 `body` tag options:
@@ -35,7 +36,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -44,7 +45,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> -->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -61,11 +62,11 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
+        <!-- <div class="image">
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
+        </div> -->
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">Aplikasi Rental Kendaraan</a>
         </div>
       </div>
 
@@ -111,8 +112,8 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('mobil.index') }}" class="nav-link">
+                  <i class="fas fa-car nav-icon"></i>
                   <p>Mobil</p>
                 </a>
               </li>
@@ -123,7 +124,7 @@
                 onclick="event.preventDefault();
                  document.getElementById('logout-form').submit();">
                  <i class="nav-icon fas fa-power-off"></i>
-                {{ __('Logout') }}
+                <p>Logout<p>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf
@@ -165,12 +166,42 @@
 <script src="{{ asset ('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE -->
 <script src="{{ asset ('dist/js/adminlte.js') }}"></script>
-
+<!-- bs-custom-file-input -->
+<script src="{{ asset ('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 <!-- OPTIONAL SCRIPTS -->
 <script src="{{ asset ('plugins/chart.js/Chart.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset ('dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset ('dist/js/pages/dashboard3.js') }}"></script>
+
+<!-- <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script> -->
+
+<script>
+$(function () {
+  bsCustomFileInput.init();
+});
+</script>
+<!-- <script type="text/javascript">
+  $(document).ready(function () {
+
+    var table = $('#editdatatable').Datatable();
+
+    table.on('click','.edit',function(){
+      tr = $(this).closest('tr');
+      if ($($tr).hasClass('child')) {
+        $tr = $tr.prev(.parent);
+      }
+      var data = table.row($tr).data();
+      console.log(data);
+      $('#name').val(data[1]);
+
+      $('#editFrom').attr('action','/mobil/'+data[0]);
+      $('#editModal').modal('show');
+    });
+
+  });
+</script> -->
 </body>
 </html>

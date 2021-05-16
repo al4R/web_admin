@@ -47,7 +47,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('userupdate')->with('user',$user);
     }
 
     /**
@@ -70,7 +71,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->telepon = $request->input('telepon');
+        $user->image = $request->input('image');
+
+        $user->save();
+        return view('userupdate')->with('user',$user);
     }
 
     /**
@@ -81,6 +89,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('user');
     }
 }

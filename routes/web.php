@@ -19,3 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/user', 'UserController');
+Route::resource('/mobil', 'MobilController');
+Route::get('/mobilupdate/{id}','MobilController@show');
+Route::put('/mobilupdate/{id}','MobilController@update');
+Route::get('/mobildelete/{id}','MobilController@destroy');
+
+Route::get('/userupdate/{id}','UserController@show');
+Route::put('/userupdate/{id}','UserController@update');
+Route::get('/userdelete/{id}','UserController@destroy');
+
