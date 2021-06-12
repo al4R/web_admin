@@ -14,14 +14,18 @@ class CreateTransaksisTable extends Migration
     public function up()
     {
         Schema::create('transaksis', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id',10);
             $table->integer('user_id')->unsigned();
-            $table->string('kode_tran');
+            $table->string('kode_tran',20);
             $table->timestamp('tgl_order')->nullable();
-            $table->bigInteger('total_harga')->unsigned()->nullable();
-            $table->integer('statusByr');
-            $table->integer('statusTr');
-            $table->string('bukti_tf')->nullable();
+            $table->string('total_harga',20)->nullable();
+            $table->boolean('status_tr')->default(false);
+            $table->string('transfer',100)->nullable();
+            $table->string('tgl_sewa',20)->nullable();
+            $table->string('tgl_akhir_sewa',20)->nullable();
+            $table->string('lama_sewa',20)->nullable();
+            $table->boolean('status_bayar')->default(false);
+            $table->boolean('cancel')->default(false);
             $table->timestamp('expired_at')->nullable();
             $table->timestamps();
         });

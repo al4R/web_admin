@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaksi extends Model
 {
     protected $fillable= [
-        'user_id', 'kode_tran', 'tgl_order','statusByr', 'total_harga','statusTr',
-        'bukti_tf', 'expired_at'
+        'user_id', 'kode_tran', 'tgl_order', 'total_harga','status_tr','cancel','transfer', 'expired_at','tgl_sewa','tgl_akhir_sewa','lama_sewa'
     ];
 
     public function details(){

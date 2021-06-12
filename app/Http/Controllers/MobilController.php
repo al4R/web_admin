@@ -44,12 +44,11 @@ class MobilController extends Controller
        $mobil->transmisi = $request->input('transmisi');
        $mobil->kapasitas = $request->input('kapasitas');
        $mobil->no_kendaraan = $request->input('no_kendaraan');
-       $mobil->status = $request->input('status');
        $mobil->deskripsi = $request->input('deskripsi');
             if($request->hasfile('image')) {
                 $file = $request->file('image');
                 $ext = $file->getClientOriginalName();
-                $fileName = date('mYdHs').rand(1,999).'_'.$ext;
+                $fileName = date('mYd').rand(1,10).'_'.$ext;
                 $file->storeAs('public/mobil', $fileName);
                 $mobil->image=$fileName;
             } else {
@@ -124,7 +123,6 @@ class MobilController extends Controller
             $file->storeAs('public/mobil', $fileName);
             $mobil->image=$fileName;
         } else {
-            return $request;
             $mobil->image = '';
         }
         $mobil->save();

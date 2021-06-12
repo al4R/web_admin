@@ -51,9 +51,9 @@
                         </div>
                         <div class="form-group">
                         <label>Select</label>
-                        <select class="form-control" name="kategori_id" placeholder="{{ $mobil->kategori_id }}" value="{{ $mobil->kategori_id }}">
+                        <select class="form-control" name="status" placeholder="{{ $mobil->status }}" value="{{ $mobil->status }}">
                           <option value="1">Ada</option>
-                          <option value="2">Dipinjam</option>
+                          <option value="0">Dipinjam</option>
                         </select>
                       </div>
                         <div class="form-group">

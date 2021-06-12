@@ -36,6 +36,13 @@
                     <label >Telepon</label>
                     <input type="text" class="form-control"  value="{{ $user->telepon }}" name="telepon">
                 </div>
+                <div class="form-group">
+                    <label>Select</label>
+                        <select class="form-control" name="status"  value="{{ $user->status }}">
+                          <option value= 0>Belum Verifikasi</option>
+                          <option value= 1>Verifikasi</option>
+                        </select>
+                      </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

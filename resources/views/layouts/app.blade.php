@@ -7,7 +7,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>
+    Aplikasi Rental Kendaraan
+    
+    </title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,13 +21,40 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+            html, body {
+                background-color: #7dc6fa;
+                color: #636b6f;
+                font-family: 'Rubiik', sans-serif;
+                font-weight: 200;
+                height: 100vh;
+                margin: 0;
+            }
+            /* .navbar {
+                background-color: #89b8d9;
+            } */
+            a{
+                margin: 10;
+            }
+            a:visited {
+            color: #ffffff;
+            background-color: transparent;
+            text-decoration: none;
+            }
+            a:hover {
+            color: #ffffff;
+            background-color: transparent;
+            text-decoration: none;
+            }
+    </style>        
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="new-nav" href="{{ url('/') }}">
+                    <!-- {{ config('app.name', 'Laravel') }} -->
+                    Aplikasi Rental Kendaraan
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

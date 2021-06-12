@@ -14,12 +14,13 @@ class CreateDetailTransaksisTable extends Migration
     public function up()
     {
         Schema::create('detail_transaksis', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id',10);
             $table->integer('transaksi_id')->unsigned();
             $table->integer('mobil_id')->unsigned();
-            $table->string('harga_sewa');
-            $table->string('tgl_sewa')->nullable();
-            $table->string('tgl_akhir_sewa')->nullable();
+            $table->string('harga_sewa',10)->nullable();
+            // $table->string('tgl_sewa',20)->nullable();
+            // $table->string('tgl_akhir_sewa',20)->nullable();
+            // $table->string('lama_sewa',10)->nullable();
             $table->timestamps();
         });
     }

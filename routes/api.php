@@ -20,15 +20,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login','Api\UserController@login');
 Route::post('register','Api\UserController@register');
 Route::get('getuser','Api\UserController@index');
-// Route::get('getuser','Api\UserController@show');
-Route::patch('updateuser/{id}','Api\UserController@update');
+
+Route::post('uimage/{id}','Api\UserController@updateImg');
+
+Route::post('upuser/{id}','Api\UserController@update');
+Route::post('upass/{id}','Api\UserController@updatePass');
 
 Route::get('mobil','Api\MobilController@index');
-Route::patch('updatemobil/{id}','Api\MobilController@update');
+Route::post('updatemobil/{id}','Api\MobilController@update');
 
 
 Route::post('pesan','Api\TransaksiController@store');
 Route::get('history/{id}','Api\TransaksiController@history');
+Route::get('berjalan/{id}','Api\TransaksiController@berjalan');
                          
 
 

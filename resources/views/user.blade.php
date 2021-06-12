@@ -29,6 +29,7 @@
                     <th>Email</th>
                     <th>No Telepon</th>
                     <th>NIK</th>
+                    <th>Status</th>
                     <th style="width: 40px">Action</th>
                 </tr>
                 </thead>
@@ -40,6 +41,7 @@
                         <td>{{ $data->email }}</td>
                         <td>{{ $data->telepon }}</td>
                         <td>{{ $data->nik }}</td>
+                        <td>{{ $data->status}}</td>
                         <td>
                         <a href="/userupdate/{{$data->id}}">
                             <i class="fa fa-edit blue"></i>

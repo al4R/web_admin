@@ -116,14 +116,6 @@
                         </div>
 
                         <div class="form-group">
-                        <label>Status</label>
-                        <select class="form-control" name="status">
-                          <option value="1">ada</option>
-                          <option value="2">dipinjam</option>
-                        </select>
-                        </div>
-
-                        <div class="form-group">
                           <label for="exampleInputFile">File input</label>
                           <div class="input-group">
                             <div class="custom-file">

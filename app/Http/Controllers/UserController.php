@@ -76,9 +76,9 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->telepon = $request->input('telepon');
         $user->image = $request->input('image');
-
+        $user->status = $request->input('status');
         $user->save();
-        return view('userupdate')->with('user',$user);
+        return redirect('user');
     }
 
     /**
