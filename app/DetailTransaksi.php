@@ -10,7 +10,7 @@ class DetailTransaksi extends Model
     // ,'tgl_sewa','tgl_akhir_sewa'
 ];
 
-    public function detailTr(){
+    public function transaksi(){
         return $this->belongsTo(Transaksi::class,"transaksi_id","id");
     }
 

@@ -33,6 +33,8 @@ Route::post('updatemobil/{id}','Api\MobilController@update');
 Route::post('pesan','Api\TransaksiController@store');
 Route::get('history/{id}','Api\TransaksiController@history');
 Route::get('berjalan/{id}','Api\TransaksiController@berjalan');
+Route::post('upload/{id}','Api\TransaksiController@upload');
+Route::post('cancel/{id}','Api\TransaksiController@cancel');
                          
 
 

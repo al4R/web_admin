@@ -34,21 +34,20 @@ class TransaksiController extends Controller
 
         \DB::beginTransaction();
         $transaksi = Transaksi::create($dataTransaksi);
-        foreach ($request->mobils as $mobil){
             $detail = [
                 'transaksi_id' => $transaksi->id,
-                'mobil_id' => $mobil['id'],
-                'harga_sewa' => $mobil['harga_sewa']
+                'mobil_id' => $request->input('id'),
+                'harga_sewa' => $request->input('harga_sewa')
                 //
             ];
             $detailTransaksi = DetailTransaksi::create($detail);
-        }
+            
         if(!empty($transaksi) && !empty($detailTransaksi)){
             \DB::commit();
             return response()->json([
                 'success' => 1,
                 'message' => 'Berhasil',
-                'transaksi' => collect($transaksi)
+                'pesan' => collect($transaksi)
             ]);
         }else{
             \DB::rollback();
@@ -57,7 +56,7 @@ class TransaksiController extends Controller
     }   
     
     public function history($id){
-        $transaksis = Transaksi::where('cancel','=',false)->where('status_tr','=',true)->with(['user'])->whereHas('user',function ($query) use ($id){
+        $transaksis = Transaksi::where('cancel','=',0)->where('status_tr','=',1)->with(['user'])->whereHas('user',function ($query) use ($id){
             $query->whereId($id);
         })->get();
         foreach ($transaksis as $transaksi){
@@ -79,7 +78,7 @@ class TransaksiController extends Controller
 
     }
     public function berjalan($id){
-        $transaksis = Transaksi::where('cancel','=',false)->where('status_tr','=',false)->with(['user'])->whereHas('user',function ($query) use ($id){
+        $transaksis = Transaksi::where('cancel',0)->where('status_tr',0)->with(['user'])->whereHas('user',function ($query) use ($id){
             $query->whereId($id);
         })->get();
         foreach ($transaksis as $transaksi){
@@ -100,7 +99,48 @@ class TransaksiController extends Controller
         }
 
     }
+    public function upload(Request $request,$id){
 
+        $transaksi = Transaksi::find($id);
+        if($request->hasfile('bukti_tf')) {
+            $file = $request->file('bukti_tf');
+            $ext = $file->getClientOriginalName();
+            $fileName = date('mYd').rand(1,10).'_'.$ext;
+            $file->storeAs('public/bukti', $fileName);
+            $transaksi->bukti_tf=$fileName;
+        } else {
+            return $request;
+            $transaksi->bukti_tf = '';
+        }
+        $transaksi->save();    
+        if($transaksi){
+            return response()->json([
+                'success' => 1,
+                'message' => 'Berhasil'.$transaksi->bukti_tf,
+                'upload'  => $transaksi
+            ]);            
+        }
+
+        return $this->error('gagal');
+    }
+
+    public function cancel(Request $request,$id){
+        $transaksi = Transaksi::find($id);
+
+        $transaksi->cancel = $request->input('cancel');
+        $transaksi->save();
+        if($transaksi)
+       { 
+           return response()->json([
+            'success' => 1,
+            'message' => 'berhasil',
+            'cancel'    => $transaksi
+        ]);
+        }else{
+            return $this->error('gagal');
+        }
+    }
+   
     public function error($pesan){
         return response()->json([
             'success' => 0,

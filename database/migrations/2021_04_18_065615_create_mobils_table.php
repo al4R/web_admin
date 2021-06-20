@@ -22,7 +22,7 @@ class CreateMobilsTable extends Migration
             $table->string('transmisi',10)->nullable();
             $table->string('kapasitas',10)->nullable();
             $table->string('no_kendaraan',10)->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(0);
             $table->string('image',100)->nullable();
             $table->text('deskripsi')->nullable();
             $table->timestamps();

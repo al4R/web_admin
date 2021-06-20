@@ -11,20 +11,30 @@ class MobilController extends Controller
     public function index(Request $request){
         // dd($request->all());die();
         $mobil = Mobil::all();
-        return response()->json([
-            'success' => 1,
-            'message' => 'berhasil',
-            'mobil'    => $mobil
-        ]);
+        if(!empty($mobil))
+        { 
+            return response()->json([
+             'success' => 1,
+             'message' => 'berhasil',
+             'mobil'   => $mobil
+         ]);
+         }else{
+             return $this->error('gagal');
+         }
     }
     public function show($id){
         // dd($request->all());die();
         $mobil = Mobil::find($id);
-        return response()->json([
-            'success' => 1,
-            'message' => 'berhasil',
-            'mobil'    => $mobil
-        ]);
+        if(!empty($mobil))
+        { 
+            return response()->json([
+             'success' => 1,
+             'message' => 'berhasil',
+             'mobil'   => $mobil
+         ]);
+         }else{
+             return $this->error('gagal');
+         }
     }
 
     public function update(Request $request,$id){
@@ -33,12 +43,22 @@ class MobilController extends Controller
         $mobil->status = $request->input('status');
 
         $mobil->save();
-        return response()->json([
+       if(!empty($mobil))
+       { 
+           return response()->json([
             'success' => 1,
             'message' => 'berhasil',
-            'mobil'    => $mobil
+            'update'    => $mobil
         ]);
+        }else{
+            return $this->error('gagal');
+        }
     }
     
-
+    public function error($pesan){
+        return response()->json([
+            'success' => 0,
+            'message' => $pesan
+        ]);
+    }
 }

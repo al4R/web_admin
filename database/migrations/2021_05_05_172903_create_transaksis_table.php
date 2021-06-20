@@ -19,13 +19,14 @@ class CreateTransaksisTable extends Migration
             $table->string('kode_tran',20);
             $table->timestamp('tgl_order')->nullable();
             $table->string('total_harga',20)->nullable();
-            $table->boolean('status_tr')->default(false);
-            $table->string('transfer',100)->nullable();
+            $table->boolean('status_tr')->default(0);
+            $table->string('transfer',30)->nullable();
+            $table->string('bukti_tf',100)->nullable();
             $table->string('tgl_sewa',20)->nullable();
             $table->string('tgl_akhir_sewa',20)->nullable();
             $table->string('lama_sewa',20)->nullable();
-            $table->boolean('status_bayar')->default(false);
-            $table->boolean('cancel')->default(false);
+            $table->boolean('status_bayar')->default(0);
+            $table->boolean('cancel')->default(0);
             $table->timestamp('expired_at')->nullable();
             $table->timestamps();
         });

@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('image',100)->nullable();
             $table->string('ktp',100)->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

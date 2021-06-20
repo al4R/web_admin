@@ -31,20 +31,21 @@ class UserController extends Controller
     public function login(Request $request){
         // dd($request->all());die();
         $user = User::where('email', $request->email)->first();
-        $status = User::where('status','=',true)->first();
+        $status = User::where('status',1)->first();
+        
         
         if($user){
-            if($status){
-                if(password_verify($request->password, $user->password)){
+            if(password_verify($request->password, $user->password)){
+                    if($status){
                     return response()->json([
                         'success' => 1,
                         'message' => 'Selamat datang '.$user->name,
                         'user' => $user
                     ]);
                 }
-                return $this->error('Password Salah');
+                return $this->error('Tunggu verifikasi dari admin');
             }
-            return $this->error('Tunggu verifikasi dari admin');
+            return $this->error('Password Salah');
         }
         return $this->error('Email tidak terdaftar');
     }
