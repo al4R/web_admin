@@ -15,14 +15,14 @@ class CreateMobilsTable extends Migration
     {
         Schema::create('mobils', function (Blueprint $table) {
             $table->bigIncrements('id',10);
-            $table->string('name',30)->nullable();
-            $table->string('merk',10)->unique()->nullable();
-            $table->string('harga',10)->nullable();
-            $table->string('tahun',10)->nullable();
-            $table->string('transmisi',10)->nullable();
-            $table->string('kapasitas',10)->nullable();
+            $table->string('model',20)->nullable();
+            $table->string('tahun',20)->nullable();
+            $table->string('transmisi',20)->nullable();
+            $table->string('kapasitas',20)->nullable();
+            $table->string('merk',20)->nullable();
+            $table->string('harga',20)->nullable();
             $table->string('no_kendaraan',10)->nullable();
-            $table->boolean('status')->default(0);
+            $table->integer('status')->default(0);
             $table->string('image',100)->nullable();
             $table->text('deskripsi')->nullable();
             $table->timestamps();

@@ -82,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                <img src="/storage/image/splash.png" alt="W3Schools.com" style="width:202px;height:202px;">
+                <img src="/storage/image/splash.png" alt="logo.com" style="width:202px;height:202px;">
                 </div>
                 <div class="title">
                     Aplikasi Rental Kendaraan

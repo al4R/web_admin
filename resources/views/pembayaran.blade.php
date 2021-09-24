@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Daftar pengguna</h1>
+            <h1 class="m-0">Daftar pembayaran</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -18,6 +18,7 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content-header -->
 
     <!-- Main content -->
     <section class="content">
@@ -25,40 +26,37 @@
 
         <div class="card">
             <div class="card-header">
-            <h3 class="card-title">Tabel Pengguna</h3>
+            <h3 class="card-title">Tabel Pembayaran</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
-            <table class="table table-striped">
+                <table id="editdatatable"class="table table-striped">
                 <thead>
                 <tr>
                     <th style="width: 10px">#</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>No Telepon</th>
-                    <th>NIK</th>
-                    <th>Status</th>
-                    <th style="width: 40px">Aksi</th>
+                    <th>Kode Transaksi</th>
+                    <th>Status Bayar</th>
+                    <th>transfer</th>
+                    <th>No kendaraan</th>
+                    <th style="width: 160px">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($listUser as $data)
+                @foreach($listBayar as $data)
                     <tr>
                         <td>{{ $data->id }}</td>
-                        <td>{{ $data->name }}</td>
-                        <td>{{ $data->email }}</td>
-                        <td>{{ $data->telepon }}</td>
-                        <td>{{ $data->nik }}</td>
-                        <td>{{ $data->status}}</td>
+                        <td>{{ $data->kode_tran}}</td>
+                        <td>{{ $data->status_bayar }}</td>
+                        <td>{{ $data->transfer }}</td>
+                        <td>{{ $data->mobil->no_kendaraan}}</td>
                         <td>
-                        <a href="/userupdate/{{$data->id}}">
-                            <i class="fa fa-edit blue"></i>
-                        </a>
-                        /
-                        <a href="/userdelete/{{$data->id}}">
-                            <i class="fa fa-trash red"></i>
-                        </a>
-                        <a href="/useracc/{{$data->id}}" type="button" class="btn btn btn-success btn-xs" style="width: 50px" >Terima</a>
+                       
+                        <a href="/acctransaksi/{{$data->id}}" type="button" class="btn btn btn-success btn-xs" style="width: 50px" >Terima</a>
+              
+                        <!-- <a href="/gagal/{{$data->id}}" type="button" class="btn btn btn-danger btn-xs">Cancel</a> -->
+                        <br></br>
+
+                        <!-- <a href="/selesai/{{$data->id}}" type="button" class="btn btn btn-primary btn-xs">Selesai</a> -->
                         </td>
                     </tr>
                     @endforeach
@@ -66,10 +64,10 @@
                 </table>
               </div>
               <!-- /.card-body -->
-            </div>
-        </div>
+            
+      </div>
+      
     </section>
     <!-- /.content -->
-  </div>
-</div>
+
 @endsection

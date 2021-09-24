@@ -37,8 +37,10 @@ class MobilController extends Controller
     public function store(Request $request)
     {
        $mobil = new Mobil();
-       $mobil->name = $request->input('name');
+       $mobil->model = $request->input('model');
        $mobil->harga = $request->input('harga');
+    //    $mobil->merk_id = $request->input('merk_id');
+    //    $mobil->seri_id = $request->input('seri_id');
        $mobil->merk = $request->input('merk');
        $mobil->tahun = $request->input('tahun');
        $mobil->transmisi = $request->input('transmisi');
@@ -107,14 +109,16 @@ class MobilController extends Controller
     {
         
         $mobil = Mobil::find($id);
-        $mobil->name = $request->input('name');
-        $mobil->harga = $request->input('harga');
-        $mobil->merk = $request->input('merk');
-        $mobil->tahun = $request->input('tahun');
-        $mobil->transmisi = $request->input('transmisi');
-        $mobil->kapasitas = $request->input('kapasitas');
-        $mobil->status = $request->input('status');
-        $mobil->deskripsi = $request->input('deskripsi');
+        $mobil->model = $request->input('model');
+       $mobil->harga = $request->input('harga');
+    //    $mobil->merk_id = $request->input('merk_id');
+    //    $mobil->seri_id = $request->input('seri_id');
+       $mobil->merk = $request->input('merk');
+       $mobil->tahun = $request->input('tahun');
+       $mobil->transmisi = $request->input('transmisi');
+       $mobil->kapasitas = $request->input('kapasitas');
+       $mobil->no_kendaraan = $request->input('no_kendaraan');
+       $mobil->deskripsi = $request->input('deskripsi');
 
         if($request->hasfile('image')) {
             $file = $request->file('image');
@@ -123,7 +127,7 @@ class MobilController extends Controller
             $file->storeAs('public/mobil', $fileName);
             $mobil->image=$fileName;
         } else {
-            $mobil->image = '';
+            $mobil->image = $mobil->image;
         }
         $mobil->save();
         return redirect('mobil');

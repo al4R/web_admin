@@ -30,9 +30,7 @@
                 height: 100vh;
                 margin: 0;
             }
-            /* .navbar {
-                background-color: #89b8d9;
-            } */
+            /* font */
             a{
                 margin: 10;
             }
@@ -70,13 +68,13 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
+                            </li> -->
                             @if (Route::has('register'))
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
+                                </li> -->
                             @endif
                         @else
                             <li class="nav-item dropdown">

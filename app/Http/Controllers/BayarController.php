@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Transaksi;
+use App\Mobil;
 
-class UserController extends Controller
+class BayarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user['listUser'] = User::all();
-        return view('user')->with($user);
+        $bayar['listBayar'] = Transaksi::where('cancel',0)->where('status_tr',0)->where(function($q){
+            $q->where('status_bayar',1)->orWhere('status_bayar',3); 
+        })->get();
+        return view('pembayaran')->with($bayar);
     }
 
     /**
@@ -47,14 +50,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('userupdate')->with('user',$user);
-    }
-
-    public function showacc($id)
-    {
-        $user = User::find($id);
-        return view('useracc')->with('user',$user);
+        //
     }
 
     /**
@@ -65,11 +61,25 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        $user->status = 1;
-        $user->save();
-        return redirect('user');
+        
+    }
 
+    public function acc($id){
+        $transaksi = Transaksi::find($id);
+        $mobil = Mobil::find($transaksi->mobil_id);
+        $transaksi->status_bayar = 2;
+        $mobil->status = 1;
+        $mobil->save();
+        $transaksi->save();
+        return redirect('pembayaran');
+    }
+
+    public function gagal($id)
+    {
+        $transaksi = Transaksi::find($id);
+        $transaksi->status_bayar = 3;
+        $transaksi->save();
+        return redirect('pembayaran');
     }
 
     /**
@@ -81,20 +91,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->telepon = $request->input('telepon');
-        $user->nik = $request->input('nik');
-        if($request->hasfile('ktp')) {
-            $file = $request->file('ktp');
-            $ext = $file->getClientOriginalName();
-            $fileName = date('mYd').rand(1,10).'_'.$ext;
-            $file->storeAs('public/ktp', $fileName);
-            $user->ktp=$fileName;
-        }
-        $user->save();
-        return redirect('user');
+        //
     }
 
     /**
@@ -105,9 +102,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-
-        return redirect('user');
+        //
     }
 }

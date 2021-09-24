@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Daftar pengguna</h1>
+            <h1 class="m-0">Riwayat transaksi</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -18,6 +18,7 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content-header -->
 
     <!-- Main content -->
     <section class="content">
@@ -25,51 +26,51 @@
 
         <div class="card">
             <div class="card-header">
-            <h3 class="card-title">Tabel Pengguna</h3>
+            <h3 class="card-title">Tabel Riwayat</h3>
+            <!-- <button type="button" class="btn btn-info float-right " data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus blue"></i> Add</button> -->
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
-            <table class="table table-striped">
+                <table id="editdatatable"class="table table-striped">
                 <thead>
                 <tr>
                     <th style="width: 10px">#</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>No Telepon</th>
-                    <th>NIK</th>
+                    <th>Kode Transaksi</th>
+                    <th>Pemesan</th>
+                    <th>No.mobil</th>
                     <th>Status</th>
-                    <th style="width: 40px">Aksi</th>
+                    <th style="width:90px">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($listUser as $data)
+                @foreach($listRiwayat as $data)
                     <tr>
                         <td>{{ $data->id }}</td>
-                        <td>{{ $data->name }}</td>
-                        <td>{{ $data->email }}</td>
-                        <td>{{ $data->telepon }}</td>
-                        <td>{{ $data->nik }}</td>
-                        <td>{{ $data->status}}</td>
+                        <td>{{ $data->kode_tran}}</td>
+                        <td>{{ $data->user->name }}</td>
+                        <td>{{ $data->mobil->no_kendaraan }}</td>
+                        <td>Selesai</td>
                         <td>
-                        <a href="/userupdate/{{$data->id}}">
-                            <i class="fa fa-edit blue"></i>
-                        </a>
-                        /
-                        <a href="/userdelete/{{$data->id}}">
+                        <a href="/detailtransaksi/{{$data->id}}" class="btn btn-primary btn-xs">Detail </a>
+                        
+                        <!-- <a href="/mobildelete/{{$data->id}}">
                             <i class="fa fa-trash red"></i>
-                        </a>
-                        <a href="/useracc/{{$data->id}}" type="button" class="btn btn btn-success btn-xs" style="width: 50px" >Terima</a>
+                        </a> -->
                         </td>
                     </tr>
                     @endforeach
                   </tbody>
                 </table>
               </div>
-              <!-- /.card-body -->
             </div>
-        </div>
+      
+      
+      </div>
+      
     </section>
-    <!-- /.content -->
-  </div>
+
+    
+  
 </div>
+
 @endsection

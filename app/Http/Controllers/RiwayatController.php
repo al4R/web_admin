@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Transaksi;
 
-class UserController extends Controller
+class RiwayatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user['listUser'] = User::all();
-        return view('user')->with($user);
+        $riwayat['listRiwayat'] = Transaksi::where('status_tr',1)->where('status_bayar',2)->get();
+        // $gagal['listGagal'] = Transaksi::where('status_bayar','!=',2)->get();
+        return view('riwayat')->with($riwayat);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,14 +49,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('userupdate')->with('user',$user);
-    }
-
-    public function showacc($id)
-    {
-        $user = User::find($id);
-        return view('useracc')->with('user',$user);
+        //
     }
 
     /**
@@ -65,11 +60,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        $user->status = 1;
-        $user->save();
-        return redirect('user');
-
+        //
     }
 
     /**
@@ -81,20 +72,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->telepon = $request->input('telepon');
-        $user->nik = $request->input('nik');
-        if($request->hasfile('ktp')) {
-            $file = $request->file('ktp');
-            $ext = $file->getClientOriginalName();
-            $fileName = date('mYd').rand(1,10).'_'.$ext;
-            $file->storeAs('public/ktp', $fileName);
-            $user->ktp=$fileName;
-        }
-        $user->save();
-        return redirect('user');
+        //
     }
 
     /**
@@ -105,9 +83,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-
-        return redirect('user');
+        //
     }
 }

@@ -3,18 +3,33 @@
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    
+    <div class="content-header" style="margin-bottom:40px">
       <div class="container-fluid">
         <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Detail pengguna</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <!-- <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+              <li class="breadcrumb-item active">Dashboard</li> -->
+            </ol>
+          </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
     <form method="POST" action="/userupdate/{{$user->id}}" role="form" enctype="multipart/form-data">
     @csrf
     {{method_field('PUT')}}
-        <div class="modal-body">
+        <!-- <div class="modal-body"> -->
+        <div class="col-md-9 " style="margin:0 auto">
+          <div class="card card-primary">
+              <div class="card-header" style="margin-bottom:30px">
+                <h3 class="card-title">Perbarui data pengguna</h3>
+              </div>
+              <div class="col-md-11" style="margin:0 auto">
             <input type="hidden" name="id" value="{{$user->id}}">
 
                 <div class="form-group">
@@ -28,39 +43,43 @@
                 </div>
 
                 <div class="form-group">
+                    <label >Telepon</label>
+                    <input type="text" class="form-control"  value="{{ $user->telepon }}" name="telepon">
+                </div>
+
+                <div class="form-group">
                     <label >NIK</label>
                     <input type="text" class="form-control"  value="{{ $user->nik }}" name="nik">
                 </div>
 
+                
                 <div class="form-group">
-                    <label >Telepon</label>
-                    <input type="text" class="form-control"  value="{{ $user->telepon }}" name="telepon">
+                    <label >Ktp</label>
+                    <br></br>
+                    <img src="/storage/ktp/{{$user->ktp}}" alt="error" style="width:202px;height:202px;">
                 </div>
                 <div class="form-group">
-                    <label>Select</label>
-                        <select class="form-control" name="status"  value="{{ $user->status }}">
-                          <option value= 0>Belum Verifikasi</option>
-                          <option value= 1>Verifikasi</option>
-                        </select>
+                          <label for="exampleInputFile">Ubah Foto KTP</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="exampleInputFile" name="ktp">
+                              <label class="custom-file-label" for="exampleInputFile">Pilih Foto KTP</label>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                
+            
+                     <div class="modal-footer">
+                  <a href="/user" type="button" class="btn btn btn-secondary">Tutup</a>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
+          </div>
         </div>    
-
-                    
-    </form>                    
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-
-      </div>
-      
-      </section>
-      <!-- /.content -->
-    </div>
+      <!-- </div>  -->
+         
+    </form>  
+                 
 </div>
   
   @endsection

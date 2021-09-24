@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Transaksi;
+use App\Mobil;
 
-class UserController extends Controller
+class CancelController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $user['listUser'] = User::all();
-        return view('user')->with($user);
+    public function index(){
+
+        $cancel['listCancel'] = Transaksi::where('cancel',1)->where('status_tr',0)->with(['mobil'])->get();
+        return view('cancel')->with($cancel);
     }
 
     /**
@@ -47,14 +48,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('userupdate')->with('user',$user);
-    }
-
-    public function showacc($id)
-    {
-        $user = User::find($id);
-        return view('useracc')->with('user',$user);
+        //
     }
 
     /**
@@ -65,11 +59,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        $user->status = 1;
-        $user->save();
-        return redirect('user');
-
+        //
     }
 
     /**
@@ -81,20 +71,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->telepon = $request->input('telepon');
-        $user->nik = $request->input('nik');
-        if($request->hasfile('ktp')) {
-            $file = $request->file('ktp');
-            $ext = $file->getClientOriginalName();
-            $fileName = date('mYd').rand(1,10).'_'.$ext;
-            $file->storeAs('public/ktp', $fileName);
-            $user->ktp=$fileName;
-        }
-        $user->save();
-        return redirect('user');
+        //
     }
 
     /**
@@ -105,9 +82,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-
-        return redirect('user');
+        //
     }
 }

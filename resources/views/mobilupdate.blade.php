@@ -3,9 +3,18 @@
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <div class="content-header" style="margin-bottom:40px">
       <div class="container-fluid">
         <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Detail Mobil</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <!-- <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+              <li class="breadcrumb-item active">Dashboard</li> -->
+            </ol>
+          </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -19,23 +28,39 @@
 
                     @csrf
                     {{method_field('PUT')}}
-                      <div class="modal-body">
-                        <input type="hidden" name="id" value="{{$mobil->id}}">
-                        <div class="form-group">
-                          <label >Nama</label>
-                          <input type="text" class="form-control"  value="{{ $mobil->name }}" name="name">
-                        </div>
+          <div class="col-md-9 " style="margin:0 auto">
+            <div class="card card-primary">
+              <div class="card-header" style="margin-bottom:30px">
+                <h3 class="card-title">Perbarui data mobil</h3>
+              </div>
+              <div class="col-md-11" style="margin:0 auto">
+                  <input type="hidden" name="id" value="{{$mobil->id}}">
+                      <div class="form-group">
+                          <label >Model</label>
+                  <input type="text" class="form-control"  value="{{ $mobil->model }}" name="model">
+              </div>
                         <div class="form-group">
                           <label >Merk</label>
                           <input type="text" class="form-control"  value="{{ $mobil->merk }}" name="merk">
                         </div>
+                        <!-- <div class="form-group">
+                          <label >Model</label>
+                          <input type="text" class="form-control"  value="{{ $mobil->seri_id }}" name="seri_id">
+                        </div> -->
                         <div class="form-group">
                           <label >Tahun</label>
                           <input type="text" class="form-control"  value="{{ $mobil->tahun }}" name="tahun">
                         </div>
                         <div class="form-group">
-                          <label >warna</label>
-                          <input type="text" class="form-control"  value="{{ $mobil->transmisi }}" name="transmisi">
+                          <label >NO Kendaraan</label>
+                          <input type="text" class="form-control"  value="{{ $mobil->no_kendaraan }}" name="no_kendaraan">
+                        </div>
+                        <div class="form-group">
+                        <label>Transmisi</label>
+                        <select class="form-control" name="transmisi">
+                          <option value="Manual">Manual</option>
+                          <option value="Automatic">Automatic</option>
+                        </select>
                         </div>
                         <div class="form-group">
                           <label >Kapasitas</label>
@@ -50,18 +75,23 @@
                           <input type="text" class="form-control"  value="{{ $mobil->deskripsi }}" name="deskripsi">
                         </div>
                         <div class="form-group">
-                        <label>Select</label>
+                        <label>Status</label>
                         <select class="form-control" name="status" placeholder="{{ $mobil->status }}" value="{{ $mobil->status }}">
                           <option value="1">Ada</option>
                           <option value="0">Dipinjam</option>
                         </select>
                       </div>
+                      <div class="form-group">
+                        <label >Mobil</label>
+                        <br></br>
+                        <img src="/storage/mobil/{{$mobil->image}}" alt="error" style="width:202px;height:202px;">
+                      </div>
                         <div class="form-group">
-                          <label for="exampleInputFile">File input</label>
+                          <label for="exampleInputFile">Ubah gambar mobil</label>
                           <div class="input-group">
                             <div class="custom-file">
                               <input type="file" class="custom-file-input" id="exampleInputFile" name="image" value="{{ $mobil->image}}">
-                              <label class="custom-file-label" for="exampleInputFile" > Choose file</label>
+                              <label class="custom-file-label" for="exampleInputFile" > Pilih gambar</label>
                             </div>
                           </div>
                         </div>
@@ -69,10 +99,11 @@
                       <!-- /.card-body -->
                       
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <a href="/mobil" type="button" class="btn btn btn-secondary">Tutup</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                       </div>
-                    </form>
+                    </div>    
+                  </form>
         </div>
       
       </section>

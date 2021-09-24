@@ -14,7 +14,8 @@ class TransaksiController extends Controller
     public function store(Request $request){
         $validasi = Validator::make($request->all(), [
         'user_id' => 'required',
-        'total_harga' =>  'required',
+        'mobil_id' => 'required',
+        
         ]);
 
         if($validasi->fails()){
@@ -22,9 +23,9 @@ class TransaksiController extends Controller
             return $this->error($val[0]);
         }
         
-        $kode_tran = "KD/TRN-".now()->format('ymd')."/".rand(100,999);
+        $kode_tran = "KD/TRN-".now()->format('ymdh')."/".rand(100,999);
         $tgl_order = now();
-        $expired_at = now()->addDay();
+        $expired_at = now()->addHour();
     
         $dataTransaksi = array_merge($request->all(),[
             'kode_tran' => $kode_tran,
@@ -34,15 +35,8 @@ class TransaksiController extends Controller
 
         \DB::beginTransaction();
         $transaksi = Transaksi::create($dataTransaksi);
-            $detail = [
-                'transaksi_id' => $transaksi->id,
-                'mobil_id' => $request->input('id'),
-                'harga_sewa' => $request->input('harga_sewa')
-                //
-            ];
-            $detailTransaksi = DetailTransaksi::create($detail);
-            
-        if(!empty($transaksi) && !empty($detailTransaksi)){
+
+        if(!empty($transaksi)){
             \DB::commit();
             return response()->json([
                 'success' => 1,
@@ -56,16 +50,9 @@ class TransaksiController extends Controller
     }   
     
     public function history($id){
-        $transaksis = Transaksi::where('cancel','=',0)->where('status_tr','=',1)->with(['user'])->whereHas('user',function ($query) use ($id){
+        $transaksis = Transaksi::where('cancel','=',0)->where('status_tr','=',1)->with(['user'])->with(['mobil'])->whereHas('user',function ($query) use ($id){
             $query->whereId($id);
         })->get();
-        foreach ($transaksis as $transaksi){
-            $transaksi->details;
-            foreach ($transaksis as $transaksi){
-                $transaksi->details->mobil;
-            }
-        }
-
         if(!empty($transaksis) ){
             return response()->json([
                 'success' => 1,
@@ -78,16 +65,9 @@ class TransaksiController extends Controller
 
     }
     public function berjalan($id){
-        $transaksis = Transaksi::where('cancel',0)->where('status_tr',0)->with(['user'])->whereHas('user',function ($query) use ($id){
+        $transaksis = Transaksi::where('cancel',0)->where('status_tr',0)->with(['user'])->with(['mobil'])->whereHas('user',function ($query) use ($id){
             $query->whereId($id);
         })->get();
-        foreach ($transaksis as $transaksi){
-            $transaksi->details;
-            foreach ($transaksis as $transaksi){
-                $transaksi->details->mobil;
-            }
-        }
-
         if(!empty($transaksis) ){
             return response()->json([
                 'success' => 1,
@@ -108,6 +88,7 @@ class TransaksiController extends Controller
             $fileName = date('mYd').rand(1,10).'_'.$ext;
             $file->storeAs('public/bukti', $fileName);
             $transaksi->bukti_tf=$fileName;
+            $transaksi->status_bayar = 1;
         } else {
             return $request;
             $transaksi->bukti_tf = '';

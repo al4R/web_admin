@@ -24,7 +24,7 @@
   * sidebar-collapse
   * sidebar-mini
 -->
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -66,19 +66,19 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div> -->
         <div class="info">
-          <a href="#" class="d-block">Aplikasi Rental Kendaraan</a>
+          <a href="#" class="d-block">Web Admin AREK</a>
         </div>
       </div>
 
       <!-- SidebarSearch Form -->
       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <!-- <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
             <button class="btn btn-sidebar">
               <i class="fas fa-search fa-fw"></i>
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -92,11 +92,10 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Dashboard
-                <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
@@ -104,27 +103,76 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview"> -->
               <li class="nav-item">
                 <a href="{{ route('user.index') }}" class="nav-link">
                   <i class="far fa-user nav-icon"></i>
-                  <p>User</p>
+                  <p>Pengguna</p>
                 </a>
               </li>
+
               <li class="nav-item">
                 <a href="{{ route('mobil.index') }}" class="nav-link">
                   <i class="fas fa-car nav-icon"></i>
                   <p>Mobil</p>
                 </a>
               </li>
-            </ul>   
-          </li>
+
+              <li class="nav-item">
+                <a href="{{ route('transaksi.index') }}" class="nav-link">
+                  <i class="fas fa-exchange-alt nav-icon"></i>
+                  <p>Transaksi</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('pembayaran.index') }}" class="nav-link">
+                  <i class="fas fa-money-bill-wave nav-icon"></i>
+                  <p>Pembayaran</p>
+                  @if( App\Transaksi::count() == 0 )
+                  
+                  @else
+                  <span class="badge badge-primary right">{{App\Transaksi::count()}}</span>
+                  @endif
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('riwayat.index') }}" class="nav-link">
+                  <i class="fas fa-history nav-icon"></i>
+                  <p>Riwayat</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('cancel.index') }}" class="nav-link">
+                  <i class="fas fa-ban nav-icon"></i>
+                  <p>Pembatalan</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('expired.index') }}" class="nav-link">
+                  <i class="fas fa-calendar-times nav-icon"></i>
+                  <p>Kadaluarsa</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('metode.index') }}" class="nav-link">
+                  <i class="fas fa-money-check-alt nav-icon"></i>
+                  <p>Metode</p>
+                </a>
+              </li>
+
+            <!-- </ul>   
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                  document.getElementById('logout-form').submit();">
                  <i class="nav-icon fas fa-power-off"></i>
-                <p>Logout<p>
+                <p>Keluar<p>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf
@@ -148,13 +196,7 @@
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <!-- <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.1.0-rc
-    </div>
-  </footer> -->
+
 </div>
 <!-- ./wrapper -->
 
@@ -203,5 +245,12 @@ $(function () {
 
   });
 </script> -->
+@stack('scripts')
+<footer class="main-footer float-right">
+    <b>Web Admin Aplikasi Rental Kendaraan</b>
+    <!-- <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.1.0-rc
+    </div> -->
+  </footer>
 </body>
 </html>

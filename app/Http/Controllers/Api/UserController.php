@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Validator;
+
 
 class UserController extends Controller
 {
@@ -31,8 +34,7 @@ class UserController extends Controller
     public function login(Request $request){
         // dd($request->all());die();
         $user = User::where('email', $request->email)->first();
-        $status = User::where('status',1)->first();
-        
+        $status = User::where('email', $request->email)->where('status',1)->first();
         
         if($user){
             if(password_verify($request->password, $user->password)){
@@ -138,15 +140,48 @@ class UserController extends Controller
    
     public function updatePass(Request $request,$id){
         $user = User::find($id);
+        if(password_verify($request->password, $user->password)){
+            $user->password = bcrypt($request->input('new_password'));
+            $user->save();    
+            return response()->json([
+                'success' => 1,
+                'message' => 'Selamat datang '.$user->name,
+                'user'    => $user
+            ]); 
+        }
+        return $this->error('Password Salah');
+    }
+
+    public function lupapassword(Request $request){
+        $user = User::where('email', $request->email)->first();
+        $nik = User::where('nik', $request->nik)->first();
+      
+        
+        if($user){
+            if($nik){
+                return response()->json([
+                    'success' => 1,
+                    'message' => 'Selamat datang ',
+                    'user' => $nik
+                ]);
+            }
+            return $this->error('NIK salah');
+        }
+        return $this->error('Email tidak terdaftar');
+    }
+
+    public function resetpassword(Request $request,$id){
+        $user = User::find($id);
         $user->password = bcrypt($request->input('password'));
         $user->save();    
         return response()->json([
             'success' => 1,
             'message' => 'Selamat datang '.$user->name,
             'user'    => $user
-        ]); 
+        ]);
 
     }
+
     public function error($pesan){
         return response()->json([
             'success' => 0,
